@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/forms";
 
 @theme inline {
   --font-sans: var(--font-geist-sans);
