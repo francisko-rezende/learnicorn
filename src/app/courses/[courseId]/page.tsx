@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { courses } from '@/data/courses';
 import { notFound } from 'next/navigation';
 import { LucideBookOpen } from 'lucide-react';
