@@ -1,6 +1,17 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@plugin "@tailwindcss/forms";
 
 @theme inline {
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+}
+
+@layer base {
+  :focus {
+    @apply ring-2 ring-slate-800 ring-offset-2 outline-none;
+  }
+}
+
+@utility container {
+  padding-inline: 0.5rem;
+  margin-inline: auto;
 }
