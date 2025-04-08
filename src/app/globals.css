@@ -4,3 +4,9 @@
 @theme inline {
   --font-sans: var(--font-geist-sans);
 }
+
+
+@utility container {
+  padding-inline: 0.5rem;
+  margin-inline: auto;
+}
