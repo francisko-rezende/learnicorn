@@ -5,6 +5,11 @@
   --font-sans: var(--font-geist-sans);
 }
 
+@layer base {
+  :focus {
+    @apply outline-none ring-2 ring-offset-2 ring-slate-800;
+  }
+}
 
 @utility container {
   padding-inline: 0.5rem;
