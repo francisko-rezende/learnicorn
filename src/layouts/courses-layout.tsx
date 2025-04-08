@@ -8,9 +8,13 @@ export const CoursesLayout = ({ children }: CoursesLayoutProps) => {
     <div className="grid h-dvh grid-rows-[auto_1fr_auto]">
       <header className="border-b border-stone-300 py-3">
         <div className="container flex items-center justify-between">
-          <h1 className="text-2xl font-extrabold text-slate-800">
-            Learnicorn 🦄
-          </h1>
+          <Link
+            className="text-2xl font-extrabold text-slate-800 transition-colors hover:text-slate-600"
+            href={'/'}
+          >
+            <h1>Learnicorn 🦄 </h1>
+          </Link>
+
           <nav>
             <ul>
               <li>

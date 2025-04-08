@@ -36,11 +36,9 @@ export default function Home() {
 
   return (
     <>
-      <section className="space-y-1">
-        <h2 className="text-2xl font-bold text-slate-700 sm:text-3xl">
-          O que você quer aprender?
-        </h2>
-        <h3 className="">
+      <section className="space-y-2">
+        <h2 className="text-4xl font-bold text-slate-700">Nossos cursos</h2>
+        <h3>
           Desbloqueie o conhecimento que você precisa pra chegar no próximo
           nível da sua carreira
         </h3>
