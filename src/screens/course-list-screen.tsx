@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { courses } from '@/data/courses';
 import { useQueryStates } from 'nuqs';
 import { coursesSearchParams } from '@/lib/nuqs/courses-search-params';
+import { unstable_ViewTransition as ViewTransition } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 
 export const CourseListScreen = () => {
   const [{ category, level }, setSearchParams] =
@@ -48,6 +50,36 @@ export const CourseListScreen = () => {
     iniciante: 'bg-green-100 text-green-800',
     intermediario: 'bg-yellow-100 text-yellow-800',
     avancado: 'bg-red-100 text-red-800',
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: 'spring',
+        stiffness: 260,
+        damping: 20,
+      },
+    },
+    exit: {
+      opacity: 0,
+      scale: 0.95,
+      transition: {
+        duration: 0.2,
+      },
+    },
   };
 
   return (
@@ -125,50 +157,83 @@ export const CourseListScreen = () => {
       </section>
 
       <section>
-        <ul className="grid grid-cols-[repeat(auto-fill,minmax(min(296px,100%),1fr))] gap-5">
-          {filteredCourses.length === 0 && (
-            <li>Nenhum curso cumpre os critérios listados</li>
+        <AnimatePresence mode="wait">
+          {filteredCourses.length === 0 ? (
+            <motion.div
+              key="no-results"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="p-8 text-center">
+                <p className="text-lg text-slate-600">
+                  Nenhum curso cumpre os critérios listados
+                </p>
+              </div>
+            </motion.div>
+          ) : (
+            <motion.ul
+              className="grid grid-cols-[repeat(auto-fill,minmax(min(296px,100%),1fr))] gap-5"
+              variants={containerVariants}
+              initial="hidden"
+              animate="show"
+              key="results-list"
+            >
+              <AnimatePresence>
+                {filteredCourses.map(course => {
+                  const { id, title, short_description, category, level } =
+                    course;
+
+                  return (
+                    <motion.li
+                      key={id}
+                      variants={cardVariants}
+                      layout
+                      className="flex h-full flex-col rounded-lg border border-slate-300 bg-white shadow-md shadow-slate-300 transition-shadow duration-300 hover:shadow-lg"
+                    >
+                      <Link href={`/courses/${id}`} className="rounded-lg">
+                        <div className="flex h-full flex-col p-4">
+                          <div className="mb-4 flex justify-between">
+                            <div
+                              className={`${categoryColors[category] || 'bg-slate-600'} rounded-full px-3 py-1 text-xs font-medium text-white`}
+                            >
+                              <span className="sr-only">Categoria: </span>
+                              {category}
+                            </div>
+
+                            <div
+                              className={`${levelColors[level] || 'bg-slate-100 text-gray-800'} rounded-full px-3 py-1 text-xs font-medium`}
+                            >
+                              <span className="sr-only">
+                                Nível de dificuldade:
+                              </span>
+                              {difficultyLabels[level] || level}
+                            </div>
+                          </div>
+
+                          <ViewTransition name={`card-${id}-title`}>
+                            <h3 className="mb-2 text-xl font-bold text-slate-900">
+                              {title}
+                            </h3>
+                          </ViewTransition>
+
+                          <p className="flex-grow text-slate-600">
+                            {short_description}
+                          </p>
+                        </div>
+                      </Link>
+                    </motion.li>
+                  );
+                })}
+              </AnimatePresence>
+            </motion.ul>
           )}
-          {filteredCourses.map(course => {
-            const { id, title, short_description, category, level } = course;
-
-            return (
-              <li
-                key={id}
-                className="flex h-full flex-col rounded-lg border border-slate-300 bg-white shadow-md shadow-slate-300 transition-shadow duration-300 hover:shadow-lg"
-              >
-                <Link href={`/courses/${id}`} className="rounded-lg">
-                  <div className="flex h-full flex-col p-4">
-                    <div className="mb-4 flex justify-between">
-                      <div
-                        className={`${categoryColors[category] || 'bg-slate-600'} rounded-full px-3 py-1 text-xs font-medium text-white`}
-                      >
-                        <span className="sr-only">Categoria: </span>
-                        {category}
-                      </div>
-
-                      <div
-                        className={`${levelColors[level] || 'bg-slate-100 text-gray-800'} rounded-full px-3 py-1 text-xs font-medium`}
-                      >
-                        <span className="sr-only">Nível de dificuldade:</span>
-                        {difficultyLabels[level] || level}
-                      </div>
-                    </div>
-
-                    <h3 className="mb-2 text-xl font-bold text-slate-900">
-                      {title}
-                    </h3>
-
-                    <p className="flex-grow text-slate-600">
-                      {short_description}
-                    </p>
-                  </div>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+        </AnimatePresence>
       </section>
+      <ViewTransition name="transition">
+        <span className="hidden">transition</span>
+      </ViewTransition>
     </>
   );
 };

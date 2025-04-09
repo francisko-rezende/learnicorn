@@ -1,6 +1,7 @@
 import { courses } from '@/data/courses';
 import { notFound } from 'next/navigation';
 import { LucideBookOpen } from 'lucide-react';
+import { unstable_ViewTransition as ViewTransition } from 'react';
 
 type CourseDetailsPageProps = {
   params: Promise<{
@@ -57,7 +58,9 @@ export default async function CourseDetailsPage({
           </div>
         </div>
 
-        <h2 className="text-4xl font-bold text-slate-700">{course.title}</h2>
+        <ViewTransition name={`card-${courseId}-title`}>
+          <h2 className="text-4xl font-bold text-slate-700">{course.title}</h2>
+        </ViewTransition>
         <h3 className="italic">{course.short_description}</h3>
         <p className="max-w-4xl text-lg">{course.full_description}</p>
         <dl className="flex gap-1">
@@ -80,7 +83,7 @@ export default async function CourseDetailsPage({
             return (
               <li
                 key={title}
-                className="flex h-full items-start rounded-lg border border-slate-300 bg-white px-2 shadow-md shadow-slate-300 transition-shadow duration-300"
+                className="flex h-full items-start rounded-lg border border-slate-300 bg-white px-4 shadow-md shadow-slate-300 transition-shadow duration-300"
               >
                 <div className="mt-4.5 rounded-full bg-slate-600/10 p-1">
                   <LucideBookOpen size={14} />
@@ -96,6 +99,9 @@ export default async function CourseDetailsPage({
           })}
         </ol>
       </section>
+      <ViewTransition name="transition">
+        <span className="hidden">transition</span>
+      </ViewTransition>
     </>
   );
 }
