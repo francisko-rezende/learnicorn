@@ -9,12 +9,15 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Select } from '@/components/select';
 import { CategoryBadge } from '@/components/category-badge/category-badge';
 import { LevelBadge } from '@/components/level-badge/level-badge';
+import { Button } from '@/components/button';
 
 export const CourseListScreen = () => {
   const [{ category, level }, setSearchParams] =
     useQueryStates(coursesSearchParams);
 
   const hasFiltered = !!category || !!level;
+
+  const handleClearFilter = () => setSearchParams(null);
 
   const totalCourses = courses.length;
 
@@ -128,13 +131,14 @@ export const CourseListScreen = () => {
             Mostrando {filteredCourses.length} de {totalCourses} cursos
           </p>
 
-          <button
-            className="cursor-pointer rounded-md border border-rose-300 px-3 py-1 text-sm font-medium text-rose-700 transition-colors hover:bg-rose-100 active:bg-rose-200 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
+          <Button
+            variant="reset"
+            size="small"
             disabled={!hasFiltered}
-            onClick={() => setSearchParams(null)}
+            onClick={handleClearFilter}
           >
             Limpar filtros
-          </button>
+          </Button>
         </div>
       </section>
 

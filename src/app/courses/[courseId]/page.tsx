@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { LucideBookOpen } from 'lucide-react';
 import { unstable_ViewTransition as ViewTransition } from 'react';
 import { enrollOnCourseAction } from '@/actions/enrollOnCourse';
+import { Button } from '@/components/button';
 
 type CourseDetailsPageProps = {
   params: Promise<{
@@ -90,9 +91,9 @@ export default async function CourseDetailsPage({
           className="motion-safe:animate-fade-in-up"
           action={enrollOnCourse}
         >
-          <button className="cursor-pointer rounded-md bg-slate-700 px-4 py-2 font-medium text-white transition-colors hover:bg-slate-800 active:bg-slate-900">
+          <Button variant="primary" size="medium">
             Matricular-se
-          </button>
+          </Button>
         </form>
       </section>
 
