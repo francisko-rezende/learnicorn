@@ -194,21 +194,25 @@ export const CourseListScreen = () => {
                       <Link href={`/courses/${id}`} className="rounded-lg">
                         <div className="flex h-full flex-col p-4">
                           <div className="mb-4 flex justify-between">
-                            <div
-                              className={`${categoryColors[category] || 'bg-slate-600'} rounded-full px-3 py-1 text-xs font-medium text-white`}
-                            >
-                              <span className="sr-only">Categoria: </span>
-                              {category}
-                            </div>
+                            <ViewTransition name={`card-${id}-category`}>
+                              <div
+                                className={`${categoryColors[category] || 'bg-slate-600'} rounded-full px-3 py-1 text-xs font-medium text-white`}
+                              >
+                                <span className="sr-only">Categoria: </span>
+                                {category}
+                              </div>
+                            </ViewTransition>
 
-                            <div
-                              className={`${levelColors[level] || 'bg-slate-100 text-gray-800'} rounded-full px-3 py-1 text-xs font-medium`}
-                            >
-                              <span className="sr-only">
-                                Nível de dificuldade:
-                              </span>
-                              {difficultyLabels[level] || level}
-                            </div>
+                            <ViewTransition name={`card-${id}-level`}>
+                              <div
+                                className={`${levelColors[level] || 'bg-slate-100 text-gray-800'} rounded-full px-3 py-1 text-xs font-medium`}
+                              >
+                                <span className="sr-only">
+                                  Nível de dificuldade:
+                                </span>
+                                {difficultyLabels[level] || level}
+                              </div>
+                            </ViewTransition>
                           </div>
 
                           <ViewTransition name={`card-${id}-title`}>
@@ -217,9 +221,11 @@ export const CourseListScreen = () => {
                             </h3>
                           </ViewTransition>
 
-                          <p className="flex-grow text-slate-600">
-                            {short_description}
-                          </p>
+                          <ViewTransition name={`card-${id}-short-description`}>
+                            <p className="flex-grow text-slate-600">
+                              {short_description}
+                            </p>
+                          </ViewTransition>
                         </div>
                       </Link>
                     </motion.li>

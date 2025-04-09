@@ -49,25 +49,32 @@ export default async function CourseDetailsPage({
     <>
       <section className="space-y-2">
         <div className="mb-4 flex gap-1">
-          <div
-            className={`${categoryColors[course.category] || 'bg-slate-600'} rounded-full px-3 py-1 text-xs font-medium text-white`}
-          >
-            <span className="sr-only">Categoria: </span>
-            {course.category}
-          </div>
+          <ViewTransition name={`card-${courseId}-category`}>
+            <div
+              className={`${categoryColors[course.category] || 'bg-slate-600'} rounded-full px-3 py-1 text-xs font-medium text-white`}
+            >
+              <span className="sr-only">Categoria: </span>
+              {course.category}
+            </div>
+          </ViewTransition>
 
-          <div
-            className={`${levelColors[course.level] || 'bg-slate-100 text-gray-800'} rounded-full px-3 py-1 text-xs font-medium`}
-          >
-            <span className="sr-only">Nível de dificuldade:</span>
-            {difficultyLabels[course.level] || course.level}
-          </div>
+          <ViewTransition name={`card-${courseId}-level`}>
+            <div
+              className={`${levelColors[course.level] || 'bg-slate-100 text-gray-800'} rounded-full px-3 py-1 text-xs font-medium`}
+            >
+              <span className="sr-only">Nível de dificuldade:</span>
+              {difficultyLabels[course.level] || course.level}
+            </div>
+          </ViewTransition>
         </div>
 
         <ViewTransition name={`card-${courseId}-title`}>
           <h2 className="text-4xl font-bold text-slate-700">{course.title}</h2>
         </ViewTransition>
-        <h3 className="italic">{course.short_description}</h3>
+
+        <ViewTransition name={`card-${courseId}-short-description`}>
+          <p className="italic">{course.short_description}</p>
+        </ViewTransition>
         <p className="max-w-4xl text-lg">{course.full_description}</p>
         <dl className="flex gap-1">
           <dt className="font-semibold">Duração:</dt>
