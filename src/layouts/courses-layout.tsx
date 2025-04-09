@@ -9,10 +9,12 @@ export const CoursesLayout = ({ children }: CoursesLayoutProps) => {
       <header className="border-b border-stone-300 py-3">
         <div className="container flex items-center justify-between">
           <Link
-            className="text-2xl font-extrabold text-slate-800 transition-colors hover:text-slate-600"
+            className="group text-2xl font-extrabold text-slate-800 transition-colors hover:text-slate-600"
             href={'/'}
           >
-            <h1>Learnicorn 🦄 </h1>
+            <h1>
+              <span className="group-hover:underline">Learnicorn </span>🦄{' '}
+            </h1>
           </Link>
 
           <nav>
@@ -20,7 +22,7 @@ export const CoursesLayout = ({ children }: CoursesLayoutProps) => {
               <li>
                 <Link
                   href={'/'}
-                  className="underline transition-colors hover:text-slate-800"
+                  className="transition-colors hover:text-slate-800 hover:underline"
                 >
                   Todos os cursos
                 </Link>
