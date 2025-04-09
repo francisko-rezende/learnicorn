@@ -7,6 +7,8 @@ import { coursesSearchParams } from '@/lib/nuqs/courses-search-params';
 import { unstable_ViewTransition as ViewTransition } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Select } from '@/components/select';
+import { CategoryBadge } from '@/components/category-badge/category-badge';
+import { LevelBadge } from '@/components/level-badge/level-badge';
 
 export const CourseListScreen = () => {
   const [{ category, level }, setSearchParams] =
@@ -33,25 +35,6 @@ export const CourseListScreen = () => {
 
       return category === course.category;
     });
-
-  const difficultyLabels = {
-    iniciante: 'Iniciante',
-    intermediario: 'Intermediário',
-    avancado: 'Avançado',
-  };
-
-  const categoryColors = {
-    Design: 'bg-purple-600',
-    Desenvolvimento: 'bg-blue-600',
-    Produto: 'bg-green-600',
-    Dados: 'bg-yellow-600',
-  };
-
-  const levelColors = {
-    iniciante: 'bg-green-100 text-green-800',
-    intermediario: 'bg-yellow-100 text-yellow-800',
-    avancado: 'bg-red-100 text-red-800',
-  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -195,23 +178,11 @@ export const CourseListScreen = () => {
                         <div className="flex h-full flex-col p-4">
                           <div className="mb-4 flex justify-between">
                             <ViewTransition name={`card-${id}-category`}>
-                              <div
-                                className={`${categoryColors[category] || 'bg-slate-600'} rounded-full px-3 py-1 text-xs font-medium text-white`}
-                              >
-                                <span className="sr-only">Categoria: </span>
-                                {category}
-                              </div>
+                              <CategoryBadge category={category} />
                             </ViewTransition>
 
                             <ViewTransition name={`card-${id}-level`}>
-                              <div
-                                className={`${levelColors[level] || 'bg-slate-100 text-gray-800'} rounded-full px-3 py-1 text-xs font-medium`}
-                              >
-                                <span className="sr-only">
-                                  Nível de dificuldade:
-                                </span>
-                                {difficultyLabels[level] || level}
-                              </div>
+                              <LevelBadge level={level} />
                             </ViewTransition>
                           </div>
 
