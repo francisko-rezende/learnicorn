@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Geist } from 'next/font/google';
 import './globals.css';
 import { CoursesLayout } from '@/layouts/courses-layout';
+import { NuqsAdapter } from 'nuqs/adapters/next';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -24,7 +25,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} bg-slate-50 text-slate-600 antialiased`}
       >
-        <CoursesLayout>{children}</CoursesLayout>
+        <NuqsAdapter>
+          <CoursesLayout>{children}</CoursesLayout>
+        </NuqsAdapter>
       </body>
     </html>
   );
