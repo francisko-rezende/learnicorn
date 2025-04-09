@@ -75,8 +75,10 @@ export default async function CourseDetailsPage({
         <ViewTransition name={`card-${courseId}-short-description`}>
           <p className="italic">{course.short_description}</p>
         </ViewTransition>
-        <p className="max-w-4xl text-lg">{course.full_description}</p>
-        <dl className="flex gap-1">
+        <p className="motion-safe:animate-fade-in-up max-w-4xl text-lg">
+          {course.full_description}
+        </p>
+        <dl className="motion-safe:animate-fade-in-up flex gap-1">
           <dt className="font-semibold">Duração:</dt>
           <dd>
             <time dateTime={`PT${course.duration_hours}H`}>
@@ -84,14 +86,17 @@ export default async function CourseDetailsPage({
             </time>
           </dd>
         </dl>
-        <form action={enrollOnCourse}>
+        <form
+          className="motion-safe:animate-fade-in-up"
+          action={enrollOnCourse}
+        >
           <button className="cursor-pointer rounded-md bg-slate-700 px-4 py-2 font-medium text-white transition-colors hover:bg-slate-800 active:bg-slate-900">
             Matricular-se
           </button>
         </form>
       </section>
 
-      <section className="space-y-2">
+      <section className="motion-safe:animate-fade-in-up space-y-2">
         <h3 className="text-2xl font-bold">Módulos</h3>
 
         <ol className="grid max-w-4xl grid-cols-1 gap-5">
