@@ -1,20 +1,4 @@
-type Category = 'Design' | 'Desenvolvimento' | 'Produto' | 'Dados';
-
-type Level = 'iniciante' | 'intermediario' | 'avancado';
-
-export type Course = {
-  id: number;
-  title: string;
-  short_description: string;
-  full_description: string;
-  category: Category;
-  level: Level;
-  duration_hours: number;
-  modules: {
-    title: string;
-    lessons: number;
-  }[];
-};
+import { Course } from '@/types/course';
 
 export const courses: Course[] = [
   {
