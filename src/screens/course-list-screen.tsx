@@ -6,6 +6,7 @@ import { useQueryStates } from 'nuqs';
 import { coursesSearchParams } from '@/lib/nuqs/courses-search-params';
 import { unstable_ViewTransition as ViewTransition } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { Select } from '@/components/select';
 
 export const CourseListScreen = () => {
   const [{ category, level }, setSearchParams] =
@@ -97,8 +98,7 @@ export const CourseListScreen = () => {
             <label htmlFor="category-filter" className="text-sm">
               Categoria
             </label>
-            <select
-              className="w-full rounded border-slate-300 text-sm capitalize focus:ring-2 focus:ring-slate-800 sm:text-base"
+            <Select
               id="category-filter"
               value={category || ''}
               onChange={e => {
@@ -115,15 +115,14 @@ export const CourseListScreen = () => {
                   </option>
                 );
               })}
-            </select>
+            </Select>
           </div>
 
           <div className="grid flex-1 gap-1">
             <label htmlFor="level-filter" className="text-sm">
               Nível de dificuldade
             </label>
-            <select
-              className="w-full rounded border-slate-300 text-sm capitalize focus:ring-2 focus:ring-slate-800 sm:text-base"
+            <Select
               id="level-filter"
               value={level || ''}
               onChange={e => {
@@ -138,18 +137,18 @@ export const CourseListScreen = () => {
                   </option>
                 );
               })}
-            </select>
+            </Select>
           </div>
         </form>
-        <div>
+        <div className="space-y-0.5">
           <p className="text-sm text-slate-600">
             Mostrando {filteredCourses.length} de {totalCourses} cursos
           </p>
+
           <button
+            className="cursor-pointer rounded-md border border-rose-300 px-3 py-1 text-sm font-medium text-rose-700 transition-colors hover:bg-rose-100 active:bg-rose-200 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
             disabled={!hasFiltered}
-            typeof="button"
             onClick={() => setSearchParams(null)}
-            className="disabled:cursor-not-allowed disabled:opacity-75"
           >
             Limpar filtros
           </button>
