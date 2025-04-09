@@ -2,6 +2,7 @@ import { courses } from '@/data/courses';
 import { notFound } from 'next/navigation';
 import { LucideBookOpen } from 'lucide-react';
 import { unstable_ViewTransition as ViewTransition } from 'react';
+import { enrollOnCourseAction } from '@/actions/enrollOnCourse';
 
 type CourseDetailsPageProps = {
   params: Promise<{
@@ -39,6 +40,11 @@ export default async function CourseDetailsPage({
     avancado: 'Avançado',
   };
 
+  const enrollOnCourse = enrollOnCourseAction.bind(null, {
+    courseId,
+    courseTitle: course.title,
+  });
+
   return (
     <>
       <section className="space-y-2">
@@ -71,6 +77,11 @@ export default async function CourseDetailsPage({
             </time>
           </dd>
         </dl>
+        <form action={enrollOnCourse}>
+          <button className="cursor-pointer rounded-md bg-slate-700 px-4 py-2 font-medium text-white transition-colors hover:bg-slate-800 active:bg-slate-900">
+            Matricular-se
+          </button>
+        </form>
       </section>
 
       <section className="space-y-2">
