@@ -3,10 +3,11 @@
 import { courses } from '@/data/courses';
 import { useQueryStates } from 'nuqs';
 import { coursesSearchParams } from '@/lib/nuqs/courses-search-params';
-import { unstable_ViewTransition as ViewTransition } from 'react';
 import { Select } from '@/components/select';
 import { Button } from '@/components/button';
 import { CourseListSection } from '@/components/course-list-section/course-list-section';
+import { useFilteredCourses } from '@/hooks/use-filtered-courses';
+import { ViewTransitionPlaceholder } from '@/components/view-transition-placeholder';
 
 export const CourseListScreen = () => {
   const [{ category, level }, setSearchParams] =
@@ -27,17 +28,7 @@ export const CourseListScreen = () => {
     { value: 'avancado', label: 'Avançado' },
   ];
 
-  const filteredCourses = courses
-    .filter(course => {
-      if (!level) return true;
-
-      return level === course.level;
-    })
-    .filter(course => {
-      if (!category) return true;
-
-      return category === course.category;
-    });
+  const filteredCourses = useFilteredCourses();
 
   return (
     <>
@@ -111,11 +102,8 @@ export const CourseListScreen = () => {
           </Button>
         </div>
       </section>
-
       <CourseListSection />
-      <ViewTransition name="transition">
-        <span className="hidden">transition</span>
-      </ViewTransition>
+      <ViewTransitionPlaceholder />
     </>
   );
 };

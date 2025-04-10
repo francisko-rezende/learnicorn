@@ -4,6 +4,7 @@ import { LucideBookOpen } from 'lucide-react';
 import { unstable_ViewTransition as ViewTransition } from 'react';
 import { enrollOnCourseAction } from '@/actions/enrollOnCourse';
 import { Button } from '@/components/button';
+import { ViewTransitionPlaceholder } from '@/components/view-transition-placeholder';
 
 type CourseDetailsPageProps = {
   params: Promise<{
@@ -123,9 +124,7 @@ export default async function CourseDetailsPage({
           })}
         </ol>
       </section>
-      <ViewTransition name="transition">
-        <span className="hidden">transition</span>
-      </ViewTransition>
+      <ViewTransitionPlaceholder />
     </>
   );
 }
