@@ -2,9 +2,9 @@
 import { courses } from '@/data/courses';
 import { useQueryStates } from 'nuqs';
 import { coursesSearchParams } from '@/lib/nuqs/courses-search-params';
-import { Select } from '@/components/select';
 import { Button } from '@/components/button';
 import { useFilteredCourses } from '@/hooks/use-filtered-courses';
+import { SelectField } from '@/components/select-field';
 
 export const CourseFiltersSection = () => {
   const [{ category, level }, setSearchParams] =
@@ -27,54 +27,52 @@ export const CourseFiltersSection = () => {
 
   const filteredCourses = useFilteredCourses();
 
+  const handleSetCategoryQueryParam = (newCategoryParam: typeof category) =>
+    setSearchParams({ category: newCategoryParam });
+
+  const handleSetLevelQueryParam = (newLevelParam: typeof level) =>
+    setSearchParams({ level: newLevelParam });
+
   return (
     <section className="flex flex-wrap items-end justify-between gap-4">
       <form className="flex flex-wrap gap-2 sm:gap-4">
-        <div className="grid flex-1 gap-1">
-          <label htmlFor="category-filter" className="text-sm">
-            Categoria
-          </label>
-          <Select
-            id="category-filter"
-            value={category || ''}
-            onChange={e => {
-              setSearchParams({
-                category: e.target.value as typeof category,
-              });
-            }}
-          >
-            <option value={''}>Todas</option>;
-            {courseCategoryOptions.map(({ value, label }) => {
-              return (
-                <option key={value} value={value}>
-                  {label}
-                </option>
-              );
-            })}
-          </Select>
-        </div>
+        <SelectField
+          id="category-filter"
+          label="Categoria"
+          value={category || ''}
+          onChange={e => {
+            const newCategoryParam = e.target.value as typeof category;
+            handleSetCategoryQueryParam(newCategoryParam);
+          }}
+        >
+          <option value={''}>Todas</option>;
+          {courseCategoryOptions.map(({ value, label }) => {
+            return (
+              <option key={value} value={value}>
+                {label}
+              </option>
+            );
+          })}
+        </SelectField>
 
-        <div className="grid flex-1 gap-1">
-          <label htmlFor="level-filter" className="text-sm">
-            Nível de dificuldade
-          </label>
-          <Select
-            id="level-filter"
-            value={level || ''}
-            onChange={e => {
-              setSearchParams({ level: e.target.value as typeof level });
-            }}
-          >
-            <option value={''}>Todos</option>
-            {courseLevelOptions.map(({ value, label }) => {
-              return (
-                <option key={value} value={value}>
-                  {label}
-                </option>
-              );
-            })}
-          </Select>
-        </div>
+        <SelectField
+          label="Nível de dificuldade"
+          id="level-filter"
+          value={level || ''}
+          onChange={e => {
+            const newLevelParam = e.target.value as typeof level;
+            handleSetLevelQueryParam(newLevelParam);
+          }}
+        >
+          <option value={''}>Todos</option>
+          {courseLevelOptions.map(({ value, label }) => {
+            return (
+              <option key={value} value={value}>
+                {label}
+              </option>
+            );
+          })}
+        </SelectField>
       </form>
       <div className="space-y-0.5">
         <p className="text-sm text-slate-600">
