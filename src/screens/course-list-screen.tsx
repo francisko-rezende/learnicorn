@@ -1,15 +1,13 @@
 'use client';
 
-import Link from 'next/link';
 import { courses } from '@/data/courses';
 import { useQueryStates } from 'nuqs';
 import { coursesSearchParams } from '@/lib/nuqs/courses-search-params';
 import { unstable_ViewTransition as ViewTransition } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Select } from '@/components/select';
-import { CategoryBadge } from '@/components/category-badge/category-badge';
-import { LevelBadge } from '@/components/level-badge/level-badge';
 import { Button } from '@/components/button';
+import { CourseCard } from '@/components/course-card';
 
 export const CourseListScreen = () => {
   const [{ category, level }, setSearchParams] =
@@ -21,11 +19,15 @@ export const CourseListScreen = () => {
 
   const totalCourses = courses.length;
 
-  const courseCategories = Array.from(
+  const courseCategoryOptions = Array.from(
     new Set(courses.map(({ category }) => category)),
-  );
+  ).map(category => ({ value: category, label: category }));
 
-  const courseLevels = Array.from(new Set(courses.map(({ level }) => level)));
+  const courseLevelOptions = [
+    { value: 'iniciante', label: 'Iniciante' },
+    { value: 'intermediario', label: 'Intermediário' },
+    { value: 'avancado', label: 'Avançado' },
+  ];
 
   const filteredCourses = courses
     .filter(course => {
@@ -45,26 +47,6 @@ export const CourseListScreen = () => {
       opacity: 1,
       transition: {
         staggerChildren: 0.05,
-      },
-    },
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: 'spring',
-        stiffness: 260,
-        damping: 20,
-      },
-    },
-    exit: {
-      opacity: 0,
-      scale: 0.95,
-      transition: {
-        duration: 0.2,
       },
     },
   };
@@ -94,10 +76,10 @@ export const CourseListScreen = () => {
               }}
             >
               <option value={''}>Todas</option>;
-              {courseCategories.map(category => {
+              {courseCategoryOptions.map(({ value, label }) => {
                 return (
-                  <option key={category} value={category}>
-                    {category}
+                  <option key={value} value={value}>
+                    {label}
                   </option>
                 );
               })}
@@ -116,10 +98,10 @@ export const CourseListScreen = () => {
               }}
             >
               <option value={''}>Todos</option>
-              {courseLevels.map(category => {
+              {courseLevelOptions.map(({ value, label }) => {
                 return (
-                  <option key={category} value={category}>
-                    {category}
+                  <option key={value} value={value}>
+                    {label}
                   </option>
                 );
               })}
@@ -172,38 +154,14 @@ export const CourseListScreen = () => {
                     course;
 
                   return (
-                    <motion.li
+                    <CourseCard
                       key={id}
-                      variants={cardVariants}
-                      layout
-                      className="flex h-full flex-col rounded-lg border border-slate-300 bg-white shadow-md shadow-slate-300 transition-shadow duration-300 hover:shadow-lg"
-                    >
-                      <Link href={`/courses/${id}`} className="rounded-lg">
-                        <div className="flex h-full flex-col p-4">
-                          <div className="mb-4 flex justify-between">
-                            <ViewTransition name={`card-${id}-category`}>
-                              <CategoryBadge category={category} />
-                            </ViewTransition>
-
-                            <ViewTransition name={`card-${id}-level`}>
-                              <LevelBadge level={level} />
-                            </ViewTransition>
-                          </div>
-
-                          <ViewTransition name={`card-${id}-title`}>
-                            <h3 className="mb-2 text-xl font-bold text-slate-900">
-                              {title}
-                            </h3>
-                          </ViewTransition>
-
-                          <ViewTransition name={`card-${id}-short-description`}>
-                            <p className="flex-grow text-slate-600">
-                              {short_description}
-                            </p>
-                          </ViewTransition>
-                        </div>
-                      </Link>
-                    </motion.li>
+                      courseCategory={category}
+                      courseId={id}
+                      courseLevel={level}
+                      courseShortDescription={short_description}
+                      courseTitle={title}
+                    />
                   );
                 })}
               </AnimatePresence>
