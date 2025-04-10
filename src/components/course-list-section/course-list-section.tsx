@@ -5,6 +5,7 @@ import { CourseCard } from '@/components/course-card';
 import { courses } from '@/data/courses';
 import { coursesSearchParams } from '@/lib/nuqs/courses-search-params';
 import { useQueryStates } from 'nuqs';
+import { CourseListNoResults } from '../course-list-no-results';
 
 export const CourseListSection = () => {
   const containerVariants = {
@@ -31,30 +32,11 @@ export const CourseListSection = () => {
       return category === course.category;
     });
 
-  const noResultsVariants = {
-    initial: { opacity: 0, y: 10 },
-    animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -10 },
-    transition: { duration: 0.3 },
-  };
-
   return (
     <section>
       <AnimatePresence mode="wait">
         {filteredCourses.length === 0 ? (
-          <motion.div
-            key="no-results"
-            initial={noResultsVariants.initial}
-            animate={noResultsVariants.animate}
-            exit={noResultsVariants.exit}
-            transition={noResultsVariants.transition}
-          >
-            <div className="p-8 text-center">
-              <p className="text-lg text-slate-600">
-                Nenhum curso cumpre os critérios listados
-              </p>
-            </div>
-          </motion.div>
+          <CourseListNoResults />
         ) : (
           <motion.ul
             className="grid grid-cols-[repeat(auto-fill,minmax(min(296px,100%),1fr))] gap-5"
