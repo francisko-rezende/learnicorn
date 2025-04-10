@@ -1,23 +1,17 @@
 'use client';
-import { courses } from '@/data/courses';
-import { useQueryStates } from 'nuqs';
-import { coursesSearchParams } from '@/lib/nuqs/courses-search-params';
+
 import { Button } from '@/components/button';
-import { useFilteredCourses } from '@/hooks/use-filtered-courses';
 import { CategorySelectField } from '@/components/category-select-field';
 import { LevelSelectField } from '../level-select-field';
+import { useCourseFiltersSection } from '@/hooks/useCourseFiltersSection';
 
 export const CourseFiltersSection = () => {
-  const [{ category, level }, setSearchParams] =
-    useQueryStates(coursesSearchParams);
-
-  const hasFiltered = !!category || !!level;
-  const totalCourses = courses.length;
-
-  const handleClearFilter = () => setSearchParams(null);
-
-  const filteredCourses = useFilteredCourses();
-  const numberOfFilteredCourses = filteredCourses.length;
+  const {
+    handleClearFilter,
+    hasFiltered,
+    numberOfFilteredCourses,
+    totalCourses,
+  } = useCourseFiltersSection();
 
   return (
     <section className="flex flex-wrap items-end justify-between gap-4">
