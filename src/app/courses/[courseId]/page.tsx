@@ -5,6 +5,9 @@ import { unstable_ViewTransition as ViewTransition } from 'react';
 import { enrollOnCourseAction } from '@/actions/enrollOnCourse';
 import { Button } from '@/components/button';
 import { ViewTransitionPlaceholder } from '@/components/view-transition-placeholder';
+import { CategoryBadge } from '@/components/category-badge/category-badge';
+import { LevelBadge } from '@/components/level-badge/level-badge';
+import { Title } from '@/components/title';
 
 type CourseDetailsPageProps = {
   params: Promise<{
@@ -23,25 +26,6 @@ export default async function CourseDetailsPage({
     notFound();
   }
 
-  const categoryColors = {
-    Design: 'bg-purple-600',
-    Desenvolvimento: 'bg-blue-600',
-    Produto: 'bg-green-600',
-    Dados: 'bg-yellow-600',
-  };
-
-  const levelColors = {
-    iniciante: 'bg-green-100 text-green-800',
-    intermediario: 'bg-yellow-100 text-yellow-800',
-    avancado: 'bg-red-100 text-red-800',
-  };
-
-  const difficultyLabels = {
-    iniciante: 'Iniciante',
-    intermediario: 'Intermediário',
-    avancado: 'Avançado',
-  };
-
   const enrollOnCourse = enrollOnCourseAction.bind(null, {
     courseId,
     courseTitle: course.title,
@@ -52,26 +36,16 @@ export default async function CourseDetailsPage({
       <section className="space-y-2">
         <div className="mb-4 flex gap-1">
           <ViewTransition name={`card-${courseId}-category`}>
-            <div
-              className={`${categoryColors[course.category] || 'bg-slate-600'} rounded-full px-3 py-1 text-xs font-medium text-white`}
-            >
-              <span className="sr-only">Categoria: </span>
-              {course.category}
-            </div>
+            <CategoryBadge category={course.category} />
           </ViewTransition>
 
           <ViewTransition name={`card-${courseId}-level`}>
-            <div
-              className={`${levelColors[course.level] || 'bg-slate-100 text-gray-800'} rounded-full px-3 py-1 text-xs font-medium`}
-            >
-              <span className="sr-only">Nível de dificuldade:</span>
-              {difficultyLabels[course.level] || course.level}
-            </div>
+            <LevelBadge level={course.level} />
           </ViewTransition>
         </div>
 
         <ViewTransition name={`card-${courseId}-title`}>
-          <h2 className="text-4xl font-bold text-slate-700">{course.title}</h2>
+          <Title>{course.title}</Title>
         </ViewTransition>
 
         <ViewTransition name={`card-${courseId}-short-description`}>
