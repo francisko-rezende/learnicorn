@@ -1,8 +1,10 @@
-import { courses } from '@/data/courses';
 import { notFound } from 'next/navigation';
 import { CourseDetailsScreen } from '@/screens/course-details-screen';
+import { courseClient } from '@/data-access/course-client';
 
 export async function generateStaticParams() {
+  const courses = courseClient.getAllCourses();
+
   return courses.map(course => ({
     slug: course.id,
   }));
@@ -19,7 +21,7 @@ export default async function CourseDetailsPage({
 }: CourseDetailsPageProps) {
   const { courseId } = await params;
 
-  const course = courses.find(({ id }) => id === Number(courseId));
+  const course = courseClient.getCourseById(Number(courseId));
 
   if (!course) {
     notFound();
