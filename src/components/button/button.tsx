@@ -5,7 +5,8 @@ const button = tv({
   base: 'cursor-pointer rounded-md font-medium transition-colors disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
   variants: {
     variant: {
-      primary: 'bg-slate-700 text-white hover:bg-slate-800 active:bg-slate-900',
+      primary:
+        'bg-indigo-600 text-white hover:bg-indigo-700 active:bg-indigo-800',
       reset:
         'border border-rose-300 text-rose-700 hover:bg-rose-100 active:bg-rose-200',
     },
