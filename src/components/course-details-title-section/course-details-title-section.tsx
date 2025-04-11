@@ -7,11 +7,11 @@ import { Course } from '@/types/course';
 import { enrollOnCourseAction } from '@/actions/enrollOnCourse';
 
 type CourseDetailsTitleSection = {
-  course: Course;
+  courseWithoutModules: Omit<Course, 'modules'>;
 };
 
 export const CourseDetailsTitleSection = ({
-  course,
+  courseWithoutModules,
 }: CourseDetailsTitleSection) => {
   const {
     id: courseId,
@@ -21,11 +21,11 @@ export const CourseDetailsTitleSection = ({
     full_description,
     level,
     title,
-  } = course;
+  } = courseWithoutModules;
 
   const enrollOnCourse = enrollOnCourseAction.bind(null, {
     courseId,
-    courseTitle: course.title,
+    courseTitle: title,
   });
 
   return (

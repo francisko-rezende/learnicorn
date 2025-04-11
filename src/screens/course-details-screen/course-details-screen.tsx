@@ -1,4 +1,3 @@
-import { LucideBookOpen } from 'lucide-react';
 import { ViewTransitionPlaceholder } from '@/components/view-transition-placeholder';
 import { Course } from '@/types/course';
 import { CourseDetailsTitleSection } from '@/components/course-details-title-section';
@@ -9,11 +8,11 @@ type CourseDetailsScreenProps = {
 };
 
 export const CourseDetailsScreen = ({ course }: CourseDetailsScreenProps) => {
-  const { modules } = course;
+  const { modules, ...courseWithoutModules } = course;
 
   return (
     <>
-      <CourseDetailsTitleSection course={course} />
+      <CourseDetailsTitleSection courseWithoutModules={courseWithoutModules} />
       <CourseModulesListSection modules={modules} />
       <ViewTransitionPlaceholder />
     </>
