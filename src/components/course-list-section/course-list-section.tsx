@@ -7,14 +7,15 @@ import { useFilteredCourses } from '@/hooks/use-filtered-courses';
 
 export const CourseListSection = () => {
   const filteredCourses = useFilteredCourses();
+  const hasResultsFromFilter = filteredCourses.length === 0;
 
   return (
     <section>
       <AnimatePresence mode="wait">
-        {filteredCourses.length === 0 ? (
-          <CourseListNoResults />
-        ) : (
+        {hasResultsFromFilter ? (
           <CourseList filteredCourses={filteredCourses} />
+        ) : (
+          <CourseListNoResults />
         )}
       </AnimatePresence>
     </section>
