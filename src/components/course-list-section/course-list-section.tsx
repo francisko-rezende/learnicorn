@@ -7,7 +7,7 @@ import { useFilteredCourses } from '@/hooks/use-filtered-courses';
 
 export const CourseListSection = () => {
   const filteredCourses = useFilteredCourses();
-  const hasResultsFromFilter = filteredCourses.length === 0;
+  const hasResultsFromFilter = filteredCourses.length > 0;
 
   return (
     <section>
