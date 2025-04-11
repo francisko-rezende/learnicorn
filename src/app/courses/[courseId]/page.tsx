@@ -9,6 +9,12 @@ import { CategoryBadge } from '@/components/category-badge/category-badge';
 import { LevelBadge } from '@/components/level-badge/level-badge';
 import { Title } from '@/components/title';
 
+export async function generateStaticParams() {
+  return courses.map(course => ({
+    slug: course.id,
+  }));
+}
+
 type CourseDetailsPageProps = {
   params: Promise<{
     courseId: string;
