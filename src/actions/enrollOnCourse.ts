@@ -1,7 +1,7 @@
 'use server';
 
 type EnrollOnCourseArgs = {
-  courseId: string;
+  courseId: number;
   courseTitle: string;
 };
 
