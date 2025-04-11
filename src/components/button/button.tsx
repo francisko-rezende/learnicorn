@@ -9,6 +9,7 @@ const button = tv({
         'bg-indigo-600 text-white hover:bg-indigo-700 active:bg-indigo-800',
       reset:
         'border border-rose-300 text-rose-700 hover:bg-rose-100 active:bg-rose-200',
+      ghost: 'text-slate-700 hover:bg-slate-100 active:bg-slate-200',
     },
     size: {
       small: 'px-3 py-1 text-sm',
