@@ -13,7 +13,7 @@ export const LevelBadge = ({ level }: LevelBadgeProps) => {
 
   return (
     <Badge variant={badgeVariant}>
-      <span className="sr-only">Categoria: </span>
+      <span className="sr-only">Nível de dificuldade: </span>
       {levelLabel}
     </Badge>
   );
