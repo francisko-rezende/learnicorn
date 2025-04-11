@@ -1,5 +1,6 @@
 import { Category } from './category';
 import { Level } from './level';
+import { CourseModule } from './course-module';
 
 export type Course = {
   id: number;
@@ -9,8 +10,5 @@ export type Course = {
   category: Category;
   level: Level;
   duration_hours: number;
-  modules: {
-    title: string;
-    lessons: number;
-  }[];
+  modules: CourseModule[];
 };
