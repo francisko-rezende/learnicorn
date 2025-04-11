@@ -15,7 +15,7 @@ export const CourseFiltersSection = () => {
 
   return (
     <section className="flex flex-wrap items-end justify-between gap-4">
-      <form className="flex flex-wrap gap-2 sm:gap-4">
+      <form className="flex min-w-[344px] flex-wrap gap-2 sm:min-w-96 sm:gap-4">
         <CategorySelectField />
 
         <LevelSelectField />
