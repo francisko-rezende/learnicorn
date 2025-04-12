@@ -44,7 +44,7 @@ A única que acho válido mencionar foi a lib de gerenciamento de estados.
 
 Aqui eu fiquei na dúvida entre [nuqs](https://nuqs.47ng.com/) e [zustand](https://zustand.docs.pmnd.rs/getting-started/introduction).
 Acho que o desafio posto é um prato cheio pra nuqs já que ela permite controlar o estado via *query params* de se maneira super simples (além de ser bem performática também) o que facilita inclusive o compartilhamento do estado por URL. Porém contudo todavia entretanto, ela não é bem uma lib de gerenciamento de estado (pelo menos não no senso mais tradicional), daí fiquei meio preocupado de eu não cumprir o requisito do desafio e fiz uma versão com zustand também. Acho Zustand legal, mais enxuta do que me lembro de alternativas como Redux e entregando performance na mesma linha então acho que resolve bem o problema aqui. Apesar disso, acho a nuqs ainda mais enxuta, [aqui o commit trocando zustand por nuqs caso vc queira comparar as duas implementações](https://github.com/francisko-rezende/learnicorn/commit/9136c5e79c1f3529f8552715d888e0966a9dc3df).
-Mas então foi isso, fiz duas versões. A versão com  [nuqs tá nessa branch](https://github.com/francisko-rezende/learnicorn/tree/feature/back-to-nuqs) e a com [zustand tá nessa](https://github.com/francisko-rezende/learnicorn). Se dependesse só de mim ia de nuqs.
+Mas então foi isso, fiz duas versões. A versão com  [nuqs tá nessa branch](https://github.com/francisko-rezende/learnicorn/tree/feature/with-nuqs) e a com [zustand tá nessa](https://github.com/francisko-rezende/learnicorn/tree/feature/with-zustand). Se dependesse só de mim ia de nuqs.
 
 Aqui um deploy da versão com nuqs: https://learnicorn.vercel.app/
 
