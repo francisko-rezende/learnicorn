@@ -3,7 +3,7 @@
 import { Button } from '@/components/button';
 import { CategorySelectField } from '@/components/category-select-field';
 import { LevelSelectField } from '../level-select-field';
-import { useCourseFiltersSection } from '@/hooks/useCourseFiltersSection';
+import { useCourseFiltersSection } from '@/hooks/use-course-filters-section';
 
 export const CourseFiltersSection = () => {
   const {

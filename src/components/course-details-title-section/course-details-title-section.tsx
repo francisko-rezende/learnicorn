@@ -4,7 +4,7 @@ import { CategoryBadge } from '@/components/category-badge/category-badge';
 import { LevelBadge } from '@/components/level-badge/level-badge';
 import { Title } from '@/components/title';
 import { Course } from '@/types/course';
-import { enrollOnCourseAction } from '@/actions/enrollOnCourse';
+import { enrollOnCourseAction } from '@/actions/enroll-on-course';
 
 type CourseDetailsTitleSection = {
   courseWithoutModules: Omit<Course, 'modules'>;

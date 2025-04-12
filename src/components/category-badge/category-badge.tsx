@@ -1,6 +1,6 @@
 import { Category } from '@/types/category';
 import { Badge } from '../badge';
-import { getCategoryBadgeVariant } from '@/utils/getCategoryBadgeVariant';
+import { getCategoryBadgeVariant } from '@/utils/get-category-badge-variant';
 
 type CategoryBadgeProps = {
   category: Category;

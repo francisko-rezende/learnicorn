@@ -1,7 +1,7 @@
 import { Level } from '@/types/level';
 import { Badge } from '../badge';
-import { getLevelBadgeVariant } from '@/utils/getLevelBadgeVariant';
-import { getLevelLabel } from '@/utils/getLevelLabel';
+import { getLevelBadgeVariant } from '@/utils/get-level-badge-variant';
+import { getLevelLabel } from '@/utils/get-level-label';
 
 type LevelBadgeProps = {
   level: Level;
