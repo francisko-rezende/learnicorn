@@ -7,7 +7,7 @@ import { useCourseFiltersSection } from '@/hooks/useCourseFiltersSection';
 
 export const CourseFiltersSection = () => {
   const {
-    handleClearFilter,
+    handleClearFilters,
     hasFiltered,
     numberOfFilteredCourses,
     totalCourses,
@@ -29,7 +29,7 @@ export const CourseFiltersSection = () => {
           variant="reset"
           size="small"
           disabled={!hasFiltered}
-          onClick={handleClearFilter}
+          onClick={handleClearFilters}
         >
           Limpar filtros
         </Button>

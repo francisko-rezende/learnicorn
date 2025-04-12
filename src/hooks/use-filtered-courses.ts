@@ -1,9 +1,8 @@
 import { courseClient } from '@/data-access/course-client';
-import { coursesSearchParams } from '@/lib/nuqs/courses-search-params';
-import { useQueryStates } from 'nuqs';
+import { useFiltersStore } from '@/providers/filters-store-provider';
 
 export const useFilteredCourses = () => {
-  const [{ category, level }] = useQueryStates(coursesSearchParams);
+  const { category, difficultyLevel: level } = useFiltersStore(state => state);
 
   const courses = courseClient.getAllCourses();
 

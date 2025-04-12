@@ -1,9 +1,8 @@
 import { courseClient } from '@/data-access/course-client';
-import { coursesSearchParams } from '@/lib/nuqs/courses-search-params';
-import { useQueryStates } from 'nuqs';
+import { useFiltersStore } from '@/providers/filters-store-provider';
 
 export const useCategorySelectField = () => {
-  const [{ category }, setSearchParams] = useQueryStates(coursesSearchParams);
+  const { category, setCategory } = useFiltersStore(state => state);
 
   const courses = courseClient.getAllCourses();
 
@@ -15,8 +14,12 @@ export const useCategorySelectField = () => {
       return a.value.localeCompare(b.value);
     });
 
-  const handleSetCategoryQueryParam = (newCategoryParam: typeof category) =>
-    setSearchParams({ category: newCategoryParam });
+  const handleSetCategoryFilter = (newCategory: typeof category) =>
+    setCategory(newCategory);
 
-  return { courseCategoryOptions, handleSetCategoryQueryParam, category };
+  return {
+    courseCategoryOptions,
+    handleSetCategoryQueryParam: handleSetCategoryFilter,
+    category,
+  };
 };

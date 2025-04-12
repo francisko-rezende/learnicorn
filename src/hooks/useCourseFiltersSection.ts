@@ -1,24 +1,30 @@
-import { coursesSearchParams } from '@/lib/nuqs/courses-search-params';
-import { useQueryStates } from 'nuqs';
 import { useFilteredCourses } from './use-filtered-courses';
 import { courseClient } from '@/data-access/course-client';
+import { useFiltersStore } from '@/providers/filters-store-provider';
 
 export const useCourseFiltersSection = () => {
-  const [{ category, level }, setSearchParams] =
-    useQueryStates(coursesSearchParams);
+  const {
+    category,
+    difficultyLevel: level,
+    setDifficultyLevel,
+    setCategory,
+  } = useFiltersStore(state => state);
 
   const courses = courseClient.getAllCourses();
 
   const hasFiltered = !!category || !!level;
   const totalCourses = courses.length;
 
-  const handleClearFilter = () => setSearchParams(null);
+  const handleClearFilters = () => {
+    setCategory('');
+    setDifficultyLevel('');
+  };
 
   const filteredCourses = useFilteredCourses();
   const numberOfFilteredCourses = filteredCourses.length;
 
   return {
-    handleClearFilter,
+    handleClearFilters,
     hasFiltered,
     numberOfFilteredCourses,
     totalCourses,

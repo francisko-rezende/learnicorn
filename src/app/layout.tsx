@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Geist } from 'next/font/google';
 import './globals.css';
 import { MainLayout } from '@/layouts/main-layout/main-layout';
-import { NuqsAdapter } from 'nuqs/adapters/next';
+import { FiltersStoreProvider } from '@/providers/filters-store-provider';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -33,9 +33,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} bg-slate-50 text-slate-600 antialiased`}
       >
-        <NuqsAdapter>
+        <FiltersStoreProvider>
           <MainLayout>{children}</MainLayout>
-        </NuqsAdapter>
+        </FiltersStoreProvider>
       </body>
     </html>
   );

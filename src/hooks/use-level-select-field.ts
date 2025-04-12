@@ -1,8 +1,9 @@
-import { coursesSearchParams } from '@/lib/nuqs/courses-search-params';
-import { useQueryStates } from 'nuqs';
+import { useFiltersStore } from '@/providers/filters-store-provider';
 
 export const useLevelSelectField = () => {
-  const [{ level }, setSearchParams] = useQueryStates(coursesSearchParams);
+  const { setDifficultyLevel, difficultyLevel } = useFiltersStore(
+    state => state,
+  );
 
   const courseLevelOptions = [
     { value: 'iniciante', label: 'Iniciante' },
@@ -10,8 +11,13 @@ export const useLevelSelectField = () => {
     { value: 'avancado', label: 'Avançado' },
   ];
 
-  const handleSetLevelQueryParam = (newLevelParam: typeof level) =>
-    setSearchParams({ level: newLevelParam });
+  const handleSetDifficultyLevelFilter = (
+    newDifficultyLevel: typeof difficultyLevel,
+  ) => setDifficultyLevel(newDifficultyLevel);
 
-  return { level, courseLevelOptions, handleSetLevelQueryParam };
+  return {
+    level: difficultyLevel,
+    courseLevelOptions,
+    handleSetLevelQueryParam: handleSetDifficultyLevelFilter,
+  };
 };
