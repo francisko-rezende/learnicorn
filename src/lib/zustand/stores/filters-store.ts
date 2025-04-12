@@ -1,21 +1,15 @@
-import { type Category } from '@/types/category';
-import { Level } from '@/types/level';
+import { CategoryFilter } from '@/types/category-filter';
+import { DifficultyLevelFilter } from '@/types/difficulty-level-filter';
 import { createStore } from 'zustand/vanilla';
 
-type CategoryFilterValue = '' | Category;
-
-type DifficultyLevelFilterValue = '' | Level;
-
 export type FiltersState = {
-  categoryFilter: CategoryFilterValue;
-  difficultyLevelFilter: DifficultyLevelFilterValue;
+  categoryFilter: CategoryFilter;
+  difficultyLevelFilter: DifficultyLevelFilter;
 };
 
 export type FiltersActions = {
-  setCategoryFilter: (newCategory: CategoryFilterValue) => void;
-  setDifficultyLevelFilter: (
-    newDifficultyLevel: DifficultyLevelFilterValue,
-  ) => void;
+  setCategoryFilter: (newCategory: CategoryFilter) => void;
+  setDifficultyLevelFilter: (newDifficultyLevel: DifficultyLevelFilter) => void;
 };
 
 export type FiltersStore = FiltersState & FiltersActions;
