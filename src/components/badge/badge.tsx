@@ -5,10 +5,10 @@ const badge = tv({
   base: 'rounded-full px-3 py-1 text-xs font-medium',
   variants: {
     variant: {
-      design: 'bg-purple-600 text-white',
-      development: 'bg-blue-600 text-white',
-      product: 'bg-green-600 text-white',
-      data: 'bg-yellow-600 text-white',
+      design: 'text-neutral-white bg-purple-600',
+      development: 'text-neutral-white bg-blue-600',
+      product: 'text-neutral-white bg-green-600',
+      data: 'text-neutral-white bg-yellow-600',
       beginner: 'bg-green-100 text-green-800',
       intermediate: 'bg-yellow-100 text-yellow-800',
       advanced: 'bg-red-100 text-red-800',

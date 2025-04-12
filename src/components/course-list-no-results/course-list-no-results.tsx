@@ -17,7 +17,7 @@ export const CourseListNoResults = () => {
       transition={noResultsVariants.transition}
     >
       <div className="p-8 text-center">
-        <p className="text-lg text-slate-600">
+        <p className="text-primary-dark text-lg">
           Nenhum curso cumpre os critérios listados
         </p>
       </div>

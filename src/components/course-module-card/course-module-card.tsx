@@ -10,13 +10,13 @@ export const CourseModuleCard = ({ module }: CourseModuleCard) => {
   return (
     <li
       key={title}
-      className="flex h-full items-start rounded-lg border border-slate-300 bg-white px-4 shadow-md shadow-slate-300"
+      className="border-primary-base shadow-primary-base bg-neutral-white flex h-full items-start rounded-lg border px-4 shadow-md"
     >
-      <div className="mt-4.5 rounded-full bg-slate-600/10 p-1">
+      <div className="bg-transparent-primary mt-4.5 rounded-full p-1">
         <LucideBookOpen size={14} />
       </div>
       <div className="flex h-full flex-col p-4">
-        <h3 className="mb-2 text-xl font-bold text-slate-900">{title}</h3>
+        <h3 className="text-primary-black mb-2 text-xl font-bold">{title}</h3>
         <p>{lessons} aulas</p>
       </div>
     </li>

@@ -21,7 +21,7 @@ export const CourseFiltersSection = () => {
         <LevelSelectField />
       </form>
       <div className="space-y-0.5">
-        <p className="text-sm text-slate-600">
+        <p className="text-primary-dark text-sm">
           Mostrando {numberOfFilteredCourses} de {totalCourses} cursos
         </p>
 

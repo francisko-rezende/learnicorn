@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body
-        className={`${geistSans.variable} bg-slate-50 text-slate-600 antialiased`}
+        className={`${geistSans.variable} bg-primary-lightest text-primary-dark antialiased`}
       >
         <FiltersStoreProvider>
           <MainLayout>{children}</MainLayout>

@@ -46,7 +46,7 @@ export const CourseCard = ({
       key={courseId}
       variants={cardVariants}
       layout
-      className="flex h-full flex-col rounded-lg border border-slate-300 bg-white shadow-md shadow-slate-300 transition-shadow duration-300 hover:shadow-lg"
+      className="border-primary-base shadow-primary-base bg-neutral-white flex h-full flex-col rounded-lg border shadow-md transition-shadow duration-300 hover:shadow-lg"
     >
       <Link href={`/courses/${courseId}`} className="rounded-lg">
         <div className="flex h-full flex-col p-4">
@@ -61,13 +61,15 @@ export const CourseCard = ({
           </div>
 
           <ViewTransition name={`card-${courseId}-title`}>
-            <h3 className="mb-2 text-xl font-bold text-slate-900">
+            <h3 className="text-primary-black mb-2 text-xl font-bold">
               {courseTitle}
             </h3>
           </ViewTransition>
 
           <ViewTransition name={`card-${courseId}-short-description`}>
-            <p className="flex-grow text-slate-600">{courseShortDescription}</p>
+            <p className="text-primary-dark flex-grow">
+              {courseShortDescription}
+            </p>
           </ViewTransition>
         </div>
       </Link>

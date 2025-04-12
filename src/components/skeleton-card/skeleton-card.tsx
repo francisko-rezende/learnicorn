@@ -7,9 +7,9 @@ type SkeletonCardProps = {
 export const SkeletonCard = ({ className = '' }: SkeletonCardProps) => {
   return (
     <div
-      className={`overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm ${className}`}
+      className={`bg-neutral-white border-primary-lighter overflow-hidden rounded-lg border shadow-sm ${className}`}
     >
-      <div className="border-b border-gray-100 p-3">
+      <div className="border-primary-lighter border-b p-3">
         <div className="mb-3 flex flex-wrap gap-2">
           <SkeletonElement
             width="w-16 sm:w-20"

@@ -6,10 +6,10 @@ type MainLayoutProps = Readonly<{
 export const MainLayout = ({ children }: MainLayoutProps) => {
   return (
     <div className="grid h-dvh grid-rows-[auto_1fr_auto]">
-      <header className="border-b border-slate-300 py-3">
+      <header className="border-primary-base border-b py-3">
         <div className="container flex items-center justify-between">
           <Link
-            className="group text-2xl font-extrabold text-slate-800 transition-colors hover:text-slate-600"
+            className="group hover:text-primary-dark text-primary-darkest text-2xl font-extrabold transition-colors"
             href={'/'}
           >
             <h1>
@@ -22,7 +22,7 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
               <li>
                 <Link
                   href={'/'}
-                  className="transition-colors hover:text-slate-800 hover:underline"
+                  className="hover:text-primary-darkest transition-colors hover:underline"
                 >
                   Todos os cursos
                 </Link>
@@ -32,7 +32,7 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
         </div>
       </header>
       <main className="container space-y-6 py-8">{children}</main>
-      <footer className="border-t border-slate-300 py-3">
+      <footer className="border-primary-base border-t py-3">
         <p className="container">Learnicorn © Alguns direitos reservados.</p>
       </footer>
     </div>

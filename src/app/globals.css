@@ -5,21 +5,46 @@
   --font-sans: var(--font-geist-sans);
   --animate-fade-in-up: fadeInUp 0.4s ease-out both;
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
+  --color-primary-lightest: var(--color-slate-50);
+  --color-primary-lighter: var(--color-slate-100);
+  --color-primary-light: var(--color-slate-200);
+  --color-primary-base: var(--color-slate-300);
+  --color-primary-medium: var(--color-slate-500);
+  --color-primary-dark: var(--color-slate-600);
+  --color-primary-darker: var(--color-slate-700);
+  --color-primary-darkest: var(--color-slate-800);
+  --color-primary-black: var(--color-slate-900);
+
+  --color-accent-base: var(--color-indigo-600);
+  --color-accent-dark: var(--color-indigo-700);
+  --color-accent-darker: var(--color-indigo-800);
+
+  --color-highlight-light: var(--color-rose-100);
+  --color-highlight-base: var(--color-rose-200);
+  --color-highlight-medium: var(--color-rose-300);
+  --color-highlight-strong: var(--color-rose-700);
+
+  --color-danger-base: var(--color-red-600);
+
+  --color-neutral-white: var(--color-white);
+
+  --color-transparent-primary: --alpha(var(--color-slate-600) / 10%);
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 }
 
 @layer base {
   :focus {
-    @apply ring-2 ring-slate-800 ring-offset-2 outline-none;
+    @apply ring-primary-darkest ring-2 ring-offset-2 outline-none;
   }
 }
 

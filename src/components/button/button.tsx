@@ -6,10 +6,11 @@ const button = tv({
   variants: {
     variant: {
       primary:
-        'bg-indigo-600 text-white hover:bg-indigo-700 active:bg-indigo-800',
+        'bg-accent-base hover:bg-accent-dark active:bg-accent-darker text-neutral-white',
       reset:
-        'border border-rose-300 text-rose-700 hover:bg-rose-100 active:bg-rose-200',
-      ghost: 'text-slate-700 hover:bg-slate-100 active:bg-slate-200',
+        'hover:bg-highlight-light active:bg-highlight-base border-highlight-medium text-highlight-strong border',
+      ghost:
+        'hover:bg-primary-lighter active:bg-primary-light text-primary-darker',
     },
     size: {
       small: 'px-3 py-1 text-sm',

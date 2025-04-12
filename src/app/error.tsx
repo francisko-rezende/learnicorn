@@ -3,10 +3,10 @@
 import { Button } from '@/components/button';
 import { useEffect } from 'react';
 
-type ErrorProps = {
+type ErrorProps = Readonly<{
   error: Error & { digest?: string };
   reset: () => void;
-};
+}>;
 
 export default function Error({ error, reset }: ErrorProps) {
   useEffect(() => {
@@ -21,7 +21,7 @@ export default function Error({ error, reset }: ErrorProps) {
         <h1 className="mt-4 text-5xl font-semibold tracking-tight text-balance text-red-600 sm:text-7xl">
           Oops!
         </h1>
-        <p className="mt-6 text-lg font-medium text-pretty text-slate-500 sm:text-xl/8">
+        <p className="text-primary-medium mt-6 text-lg font-medium text-pretty sm:text-xl/8">
           Houve um erro inesperado!
         </p>
         <div className="mt-10 flex items-center justify-center gap-x-6">
