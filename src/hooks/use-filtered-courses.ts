@@ -1,21 +1,21 @@
 import { courseClient } from '@/data-access/course-client';
-import { useFiltersStore } from '@/providers/filters-store-provider';
+import { useCourseFilters } from './use-course-filters';
 
 export const useFilteredCourses = () => {
-  const { category, difficultyLevel: level } = useFiltersStore(state => state);
+  const { difficultyLevelFilter, categoryFilter } = useCourseFilters();
 
   const courses = courseClient.getAllCourses();
 
   const filteredCourses = courses
     .filter(course => {
-      if (!level) return true;
+      if (!difficultyLevelFilter) return true;
 
-      return level === course.level;
+      return difficultyLevelFilter === course.level;
     })
     .filter(course => {
-      if (!category) return true;
+      if (!categoryFilter) return true;
 
-      return category === course.category;
+      return categoryFilter === course.category;
     });
 
   return filteredCourses;

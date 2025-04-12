@@ -1,8 +1,8 @@
 import { courseClient } from '@/data-access/course-client';
-import { useFiltersStore } from '@/providers/filters-store-provider';
+import { useCourseFilters } from './use-course-filters';
 
 export const useCategorySelectField = () => {
-  const { category, setCategory } = useFiltersStore(state => state);
+  const { categoryFilter, setCategoryFilter } = useCourseFilters();
 
   const courses = courseClient.getAllCourses();
 
@@ -14,12 +14,9 @@ export const useCategorySelectField = () => {
       return a.value.localeCompare(b.value);
     });
 
-  const handleSetCategoryFilter = (newCategory: typeof category) =>
-    setCategory(newCategory);
-
   return {
     courseCategoryOptions,
-    handleSetCategoryQueryParam: handleSetCategoryFilter,
-    category,
+    handleSetCategoryFilter: setCategoryFilter,
+    categoryFilter,
   };
 };

@@ -1,9 +1,8 @@
-import { useFiltersStore } from '@/providers/filters-store-provider';
+import { useCourseFilters } from './use-course-filters';
 
 export const useLevelSelectField = () => {
-  const { setDifficultyLevel, difficultyLevel } = useFiltersStore(
-    state => state,
-  );
+  const { difficultyLevelFilter, setDifficultyLevelFilter } =
+    useCourseFilters();
 
   const courseLevelOptions = [
     { value: 'iniciante', label: 'Iniciante' },
@@ -11,13 +10,9 @@ export const useLevelSelectField = () => {
     { value: 'avancado', label: 'Avançado' },
   ];
 
-  const handleSetDifficultyLevelFilter = (
-    newDifficultyLevel: typeof difficultyLevel,
-  ) => setDifficultyLevel(newDifficultyLevel);
-
   return {
-    level: difficultyLevel,
+    difficultyLevelFilter,
     courseLevelOptions,
-    handleSetLevelQueryParam: handleSetDifficultyLevelFilter,
+    handleSetDifficultyLevelFilter: setDifficultyLevelFilter,
   };
 };

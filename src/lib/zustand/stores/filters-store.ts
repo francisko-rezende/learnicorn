@@ -7,27 +7,29 @@ type CategoryFilterValue = '' | Category;
 type DifficultyLevelFilterValue = '' | Level;
 
 export type FiltersState = {
-  category: CategoryFilterValue;
-  difficultyLevel: DifficultyLevelFilterValue;
+  categoryFilter: CategoryFilterValue;
+  difficultyLevelFilter: DifficultyLevelFilterValue;
 };
 
 export type FiltersActions = {
-  setCategory: (newCategory: CategoryFilterValue) => void;
-  setDifficultyLevel: (newDifficultyLevel: DifficultyLevelFilterValue) => void;
+  setCategoryFilter: (newCategory: CategoryFilterValue) => void;
+  setDifficultyLevelFilter: (
+    newDifficultyLevel: DifficultyLevelFilterValue,
+  ) => void;
 };
 
 export type FiltersStore = FiltersState & FiltersActions;
 
 export const initFiltersStore = (): FiltersState => {
   return {
-    category: '',
-    difficultyLevel: '',
+    categoryFilter: '',
+    difficultyLevelFilter: '',
   };
 };
 
 export const defaultInitState: FiltersState = {
-  category: '',
-  difficultyLevel: '',
+  categoryFilter: '',
+  difficultyLevelFilter: '',
 };
 
 export const createFiltersStore = (
@@ -35,9 +37,9 @@ export const createFiltersStore = (
 ) => {
   return createStore<FiltersStore>()(set => ({
     ...initState,
-    setCategory: newCategory =>
-      set(state => ({ ...state, category: newCategory })),
-    setDifficultyLevel: newDifficultyLevel =>
-      set(state => ({ ...state, difficultyLevel: newDifficultyLevel })),
+    setCategoryFilter: newCategory =>
+      set(state => ({ ...state, categoryFilter: newCategory })),
+    setDifficultyLevelFilter: newDifficultyLevel =>
+      set(state => ({ ...state, difficultyLevelFilter: newDifficultyLevel })),
   }));
 };

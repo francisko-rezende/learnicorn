@@ -1,30 +1,21 @@
 import { useFilteredCourses } from './use-filtered-courses';
 import { courseClient } from '@/data-access/course-client';
-import { useFiltersStore } from '@/providers/filters-store-provider';
+import { useCourseFilters } from './use-course-filters';
 
 export const useCourseFiltersSection = () => {
-  const {
-    category,
-    difficultyLevel: level,
-    setDifficultyLevel,
-    setCategory,
-  } = useFiltersStore(state => state);
+  const { categoryFilter, difficultyLevelFilter, clearFilters } =
+    useCourseFilters();
 
   const courses = courseClient.getAllCourses();
 
-  const hasFiltered = !!category || !!level;
+  const hasFiltered = !!categoryFilter || !!difficultyLevelFilter;
   const totalCourses = courses.length;
-
-  const handleClearFilters = () => {
-    setCategory('');
-    setDifficultyLevel('');
-  };
 
   const filteredCourses = useFilteredCourses();
   const numberOfFilteredCourses = filteredCourses.length;
 
   return {
-    handleClearFilters,
+    handleClearFilters: clearFilters,
     hasFiltered,
     numberOfFilteredCourses,
     totalCourses,

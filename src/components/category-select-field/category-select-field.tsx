@@ -4,17 +4,17 @@ import { SelectField } from '@/components/select-field';
 import { useCategorySelectField } from '@/hooks/use-category-select-field';
 
 export const CategorySelectField = () => {
-  const { courseCategoryOptions, handleSetCategoryQueryParam, category } =
+  const { courseCategoryOptions, handleSetCategoryFilter, categoryFilter } =
     useCategorySelectField();
 
   return (
     <SelectField
       id="category-filter"
       label="Categoria"
-      value={category || ''}
+      value={categoryFilter || ''}
       onChange={e => {
-        const newCategoryParam = e.target.value as typeof category;
-        handleSetCategoryQueryParam(newCategoryParam);
+        const newCategoryParam = e.target.value as typeof categoryFilter;
+        handleSetCategoryFilter(newCategoryParam);
       }}
     >
       <option value={''}>Todas</option>

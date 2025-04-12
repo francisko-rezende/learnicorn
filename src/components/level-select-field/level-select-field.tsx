@@ -2,17 +2,21 @@ import { SelectField } from '@/components/select-field';
 import { useLevelSelectField } from '@/hooks/use-level-select-field';
 
 export const LevelSelectField = () => {
-  const { courseLevelOptions, handleSetLevelQueryParam, level } =
-    useLevelSelectField();
+  const {
+    courseLevelOptions,
+    handleSetDifficultyLevelFilter,
+    difficultyLevelFilter,
+  } = useLevelSelectField();
 
   return (
     <SelectField
       label="Nível de dificuldade"
       id="level-filter"
-      value={level || ''}
+      value={difficultyLevelFilter || ''}
       onChange={e => {
-        const newLevelParam = e.target.value as typeof level;
-        handleSetLevelQueryParam(newLevelParam);
+        const newDifficultyLevelFilter = e.target
+          .value as typeof difficultyLevelFilter;
+        handleSetDifficultyLevelFilter(newDifficultyLevelFilter);
       }}
     >
       <option value={''}>Todos</option>
