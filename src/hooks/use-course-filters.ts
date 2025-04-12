@@ -1,15 +1,26 @@
-import { useFiltersStore } from '@/providers/filters-store-provider';
+import { courseFiltersSearchParams } from '@/lib/nuqs/course-filters-search-params';
+import { CategoryFilter } from '@/types/category-filter';
+import { DifficultyLevelFilter } from '@/types/difficulty-level-filter';
+import { useQueryStates } from 'nuqs';
 
 export const useCourseFilters = () => {
-  const {
-    categoryFilter,
-    setCategoryFilter,
-    difficultyLevelFilter,
-    setDifficultyLevelFilter,
-  } = useFiltersStore(state => state);
+  const [
+    { category: categoryFilter, level: difficultyLevelFilter },
+    setSearchParams,
+  ] = useQueryStates(courseFiltersSearchParams);
+
+  const setCategoryFilter = (newCategoryFilter: CategoryFilter) => {
+    setSearchParams({ category: newCategoryFilter });
+  };
+
+  const setDifficultyLevelFilter = (
+    newDifficultyLevelFilter: DifficultyLevelFilter,
+  ) => {
+    setSearchParams({ level: newDifficultyLevelFilter });
+  };
+
   const clearFilters = () => {
-    setCategoryFilter('');
-    setDifficultyLevelFilter('');
+    setSearchParams(null);
   };
 
   return {
