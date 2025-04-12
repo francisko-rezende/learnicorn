@@ -28,7 +28,15 @@ Também fiz testes unitários e E2E. Os unitários rodam com `npm run vitest:wat
 
 ## **Escolhas técnicas e justificativas**
 
-Não vou comentar muito sobre as tecnologias obrigatórios porque bem, são obrigatórias.
+As tecnologias obrigatórias foram as seguintes:
+
+- Next.js (v15+, App router)
+- React Server Components
+- Server Actions
+- Tailwind CSS (v4+)
+- Uma library de state management à sua escolha
+
+Não vou comentar muito sobre elas porque bem, são obrigatórias.
 
 A única que acho válido mencionar foi a lib de gerenciamento de estados.
 
