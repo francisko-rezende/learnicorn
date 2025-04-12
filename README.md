@@ -1,313 +1,63 @@
-# Tera Code Challenge
+# Tera Code Challenge --- Francisko
 
-## Objetivo
+## Instruções para executar o projeto
 
-Desenvolver uma aplicação web simples que demonstre suas habilidades com Next.js, React Server Components, Server Actions e gerenciamento de estado no cliente.
+1. **Clone o repositório**
+   ```bash
+   git clone https://github.com/francisko-rezende/learnicorn.git
+   cd learnicorn
+   ```
 
-## Requisitos
+1. **Instale as dependências Certifique-se de ter o Node.js (utilizei a versão 20.17.0) instalado. Em seguida, execute:**
+   ```bash
+   npm install
+   ```
+2. **Execute o projeto rodando os seguintes comandos:**
+   ```bash
+   npm run dev // roda em modo de desenvolvimento
 
-### Tecnologias Obrigatórias
-- [Next.js (v15+, App router)](https://nextjs.org/)
-- [React Server Components](https://react.dev/reference/rsc/server-components#server-components-with-a-server)
-- [Server Actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations)
-- [Tailwind CSS (v4+)](https://tailwindcss.com/)
-- Uma library de state management à sua escolha
+   npm run build && npm run start // builda e roda o projeto em modo de produção
+   ```
 
-### Funcionalidades
+2. **Acesse o projeto usando o navegador de sua preferência (mas no chrome/chromium tem surpresa hein) usando a porta indicada no terminal, o endereço padrão é `http://localhost:3000` :**
 
-#### 1. Página Principal - Catálogo de Cursos
-- Criar uma página principal que exiba um catálogo de cursos utilizando SSR
-- Os dados devem ser do JSON fornecido ao final deste documento
-- A página deve mostrar os cursos em cards com:
-  - Título do curso
-  - Descrição curta
-  - Categoria
-  - Nível de dificuldade
 
-#### 2. Funcionalidade de Filtros (Estado Client-Side)
-- Implementar filtros para os cursos por:
-  - Categoria (todas categorias disponíveis no JSON)
-  - Nível de dificuldade (iniciante, intermediário, avançado)
-- Os filtros devem ser gerenciados com estado client-side
-- A filtragem deve acontecer sem recarregar a página
+Também fiz testes unitários e E2E. Os unitários rodam com `npm run vitest:watch` e os E2E com `npx playwright test`, mas acredito que pros testes E2E funcionarem precisa setar os navegadores. Sugiro conferir os passos [aqui](https://playwright.dev/). Ah, e os testes E2E assumem que o app vai estar rodando em `http://localhost:3000`
 
-#### 3. Detalhe do Curso
-- Ao clicar em um curso, exibir uma página de detalhes com:
-  - Todas as informações do curso
-  - Lista de módulos
-  - Botão para "Matricular-se" chamando uma Server Action apropriada (a action não precisa fazer nada, apenas retornar sucesso)
+---
 
-#### 4. Bônus (opcional)
-- Utilizar framer-motion para animações ou transições
+## **Escolhas técnicas e justificativas**
 
-## Critérios de Avaliação
+Não vou comentar muito sobre as tecnologias obrigatórios porque bem, são obrigatórias.
 
-Seu projeto será avaliado com base nos seguintes critérios:
+A única que acho válido mencionar foi a lib de gerenciamento de estados.
 
-1. **Qualidade do código**
-   - Clean code, legibilidade e organização
-   - Componentização adequada
-   - Tipos apropriados (TypeScript é um diferencial)
-   - Ser executado sem erros depois de `npm install` e `npm run dev`
+### **Zustand e Nuqs (gerenciamento de estado)**
 
-2. **Uso correto das tecnologias**
-   - Implementação adequada de Server Components e Server Actions
-   - Uso apropriado de Client Components apenas onde necessário
-   - Gerenciamento eficiente de estado client-side
+Aqui eu fiquei na dúvida entre [nuqs](https://nuqs.47ng.com/) e [zustand](https://zustand.docs.pmnd.rs/getting-started/introduction).
+Acho que o desafio posto é um prato cheio pra nuqs já que ela permite controlar o estado via *query params* de se maneira super simples (além de ser bem performática também) o que facilita inclusive o compartilhamento do estado por URL. Porém contudo todavia entretanto, ela não é bem uma lib de gerenciamento de estado (pelo menos não no senso mais tradicional), daí fiquei meio preocupado de eu não cumprir o requisito do desafio e fiz uma versão com zustand também. Acho Zustand legal, mais enxuta do que me lembro de alternativas como Redux e entregando performance na mesma linha então acho que resolve bem o problema aqui. Apesar disso, acho a nuqs ainda mais enxuta, [aqui o commit trocando zustand por nuqs caso vc queira comparar as duas implementações](https://github.com/francisko-rezende/learnicorn/commit/9136c5e79c1f3529f8552715d888e0966a9dc3df).
+Mas então foi isso, fiz duas versões. A versão com  [nuqs tá nessa branch](https://github.com/francisko-rezende/learnicorn/tree/feature/back-to-nuqs) e a com [zustand tá nessa](https://github.com/francisko-rezende/learnicorn). Se dependesse só de mim ia de nuqs.
 
-3. **Experiência do usuário**
-   - Interface visual agradável e responsiva
-   - Feedback ao usuário durante carregamentos e ações
+Aqui um deploy da versão com nuqs: https://learnicorn.vercel.app/
 
-4. **Performance**
-   - Otimização de renderização
-   - Carregamento eficiente de dados
+### **Lefthook (pre-push hook)**
 
-## Entrega
+Utilizei o Lefthook para configurar um pre-push hook que roda um build antes do push, se o build falhar o push não rola. Já quebrei dev uma vez com um PR que não buildava, depois disso sempre uso esse hook.
 
-- Crie um fork deste repositório no GitHub
-- Ao final, abra um PR atualizando este README com:
-  - Instruções para executar o projeto
-  - Escolhas técnicas e justificativas
-  - Desafios enfrentados e soluções aplicadas
-- O prazo para entrega é de 5 dias corridos
+### **Vitest (testes unitários)**
 
-## Dicas
+Melhor dos dois mundos: API igual do Jest (pelo menos até onde usei) só que muito mais rápido e moderno (com suporte a es modules, da última vez que usei jest não tinha, não sei isso mudou). Não vejo alternativa melhor pra testes unitários
 
-- Foque primeiro na funcionalidade principal antes de adicionar recursos extras ou estilizações
-- Utilize as documentações fornecidas acima para entender bem Server Components e Server Actions
-- Considere a experiência do usuário, mesmo sendo um teste técnico
-- Não se preocupe com autenticação ou persistência de dados além do que foi solicitado
+### **Playwright (testes E2E)**
 
-Boa sorte! Estamos ansiosos para ver sua solução.
+Pelo que vi tanto Cypress quanto Playwright são boas escolhas pra testes E2E, daí fui de Playwright porque tava querendo ver como funciona e não me arrependi. Tem uma extensão que faz codegen dos testes usando as ações que executamos no navegador que é mão na roda. O uso dos testes E2E trouxe muita tranquilidade na hora de ficar trocando a lib de gerenciamento de estados, é ótimo refatorar o código e pegar problemas ali nos testes.
 
-----
+### **ESLint + Prettier (formatação e linting)**
 
-### Dados
+O arroz com feijão da qualidade de código, não dá pra ficar sem. Além do que já vem no Next, configurei o plugin do tailwind pra rolar ordenação automática das classes e evitar problemas de precedência no CSS.
 
-```json
-{
-  "courses": [
-    {
-      "id": 1,
-      "title": "UX Design Fundamentals",
-      "short_description": "Aprenda os fundamentos de UX Design e crie experiências incríveis",
-      "full_description": "Este curso aborda os princípios fundamentais de User Experience Design, desde pesquisa com usuários até prototipagem. Você aprenderá metodologias práticas para criar produtos digitais centrados no usuário.",
-      "category": "Design",
-      "level": "iniciante",
-      "duration_hours": 20,
-      "modules": [
-        {
-          "title": "Introdução ao UX Design",
-          "lessons": 4
-        },
-        {
-          "title": "Pesquisa com Usuários",
-          "lessons": 5
-        },
-        {
-          "title": "Prototipagem e Testes",
-          "lessons": 6
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "title": "React Avançado",
-      "short_description": "Domine conceitos avançados de React e construa aplicações complexas",
-      "full_description": "Este curso aprofunda os conceitos avançados do React, incluindo hooks personalizados, context API, otimização de performance e integração com APIs externas. Ideal para quem já conhece os fundamentos e quer se tornar um especialista.",
-      "category": "Desenvolvimento",
-      "level": "avancado",
-      "duration_hours": 30,
-      "modules": [
-        {
-          "title": "Hooks Avançados",
-          "lessons": 7
-        },
-        {
-          "title": "Gerenciamento de Estado",
-          "lessons": 8
-        },
-        {
-          "title": "Performance e Otimização",
-          "lessons": 6
-        },
-        {
-          "title": "Testes e Deployment",
-          "lessons": 5
-        }
-      ]
-    },
-    {
-      "id": 3,
-      "title": "Product Management 101",
-      "short_description": "Inicie sua carreira em gestão de produtos digitais",
-      "full_description": "Este curso introdutório à Gestão de Produtos aborda desde a definição de visão e estratégia até metodologias ágeis para execução. Ideal para quem quer iniciar na carreira ou profissionais que desejam formalizar seus conhecimentos.",
-      "category": "Produto",
-      "level": "iniciante",
-      "duration_hours": 25,
-      "modules": [
-        {
-          "title": "Fundamentos de Produto",
-          "lessons": 5
-        },
-        {
-          "title": "Descoberta e Validação",
-          "lessons": 6
-        },
-        {
-          "title": "Métricas e Analytics",
-          "lessons": 4
-        },
-        {
-          "title": "Execução e Delivery",
-          "lessons": 5
-        }
-      ]
-    },
-    {
-      "id": 4,
-      "title": "Data Science para Produto",
-      "short_description": "Use dados para tomar melhores decisões de produto",
-      "full_description": "Este curso ensina como utilizar ciência de dados para embasar decisões de produto. Desde análise exploratória até testes A/B e modelos preditivos, você aprenderá a extrair insights valiosos de dados para criar produtos melhores.",
-      "category": "Dados",
-      "level": "intermediario",
-      "duration_hours": 35,
-      "modules": [
-        {
-          "title": "Fundamentos de Análise de Dados",
-          "lessons": 6
-        },
-        {
-          "title": "Métricas para Produto",
-          "lessons": 5
-        },
-        {
-          "title": "Testes A/B",
-          "lessons": 7
-        },
-        {
-          "title": "Modelos Preditivos",
-          "lessons": 8
-        }
-      ]
-    },
-    {
-      "id": 5,
-      "title": "IA Generativa para Designers",
-      "short_description": "Aprenda a usar IA para potencializar seu trabalho de design",
-      "full_description": "Este curso explora como designers podem utilizar Inteligência Artificial generativa para amplificar sua criatividade e produtividade. Desde ferramentas de geração de imagens até assistentes de design, você aprenderá a incorporar IA no seu fluxo de trabalho.",
-      "category": "Design",
-      "level": "intermediario",
-      "duration_hours": 18,
-      "modules": [
-        {
-          "title": "Fundamentos de IA Generativa",
-          "lessons": 4
-        },
-        {
-          "title": "Ferramentas de IA para Design",
-          "lessons": 6
-        },
-        {
-          "title": "Prompts e Direção Criativa",
-          "lessons": 5
-        },
-        {
-          "title": "Integrando IA no Fluxo de Trabalho",
-          "lessons": 3
-        }
-      ]
-    },
-    {
-      "id": 6,
-      "title": "Full-Stack JavaScript",
-      "short_description": "Desenvolva aplicações completas com JavaScript",
-      "full_description": "Este curso abrangente ensina desenvolvimento full-stack com JavaScript, desde o front-end com React até back-end com Node.js. Você aprenderá a construir aplicações completas, incluindo autenticação, banco de dados e deployment.",
-      "category": "Desenvolvimento",
-      "level": "intermediario",
-      "duration_hours": 45,
-      "modules": [
-        {
-          "title": "Front-end com React",
-          "lessons": 10
-        },
-        {
-          "title": "Back-end com Node.js",
-          "lessons": 12
-        },
-        {
-          "title": "Bancos de Dados",
-          "lessons": 8
-        },
-        {
-          "title": "Autenticação e Segurança",
-          "lessons": 6
-        },
-        {
-          "title": "Deployment e DevOps",
-          "lessons": 5
-        }
-      ]
-    },
-    {
-      "id": 7,
-      "title": "Product Leadership",
-      "short_description": "Desenvolva habilidades de liderança em produto",
-      "full_description": "Este curso avançado aborda os desafios e estratégias de liderança em produto. Desde gestão de times e stakeholders até definição de visão de longo prazo e estratégia de produto, ideal para PMs experientes que buscam papéis de liderança.",
-      "category": "Produto",
-      "level": "avancado",
-      "duration_hours": 30,
-      "modules": [
-        {
-          "title": "Liderança e Gestão de Times",
-          "lessons": 7
-        },
-        {
-          "title": "Estratégia e Visão de Produto",
-          "lessons": 8
-        },
-        {
-          "title": "Relacionamento com Stakeholders",
-          "lessons": 5
-        },
-        {
-          "title": "Métricas e OKRs",
-          "lessons": 6
-        },
-        {
-          "title": "Cultura de Produto",
-          "lessons": 4
-        }
-      ]
-    },
-    {
-      "id": 8,
-      "title": "Análise de Dados com Python",
-      "short_description": "Aprenda a analisar e visualizar dados com Python",
-      "full_description": "Este curso ensina análise e visualização de dados utilizando Python e suas principais bibliotecas. Desde manipulação de dados com Pandas até visualizações com Matplotlib e análises estatísticas, você aprenderá a extrair insights valiosos de conjuntos de dados complexos.",
-      "category": "Dados",
-      "level": "iniciante",
-      "duration_hours": 28,
-      "modules": [
-        {
-          "title": "Introdução ao Python para Dados",
-          "lessons": 6
-        },
-        {
-          "title": "Manipulação de Dados com Pandas",
-          "lessons": 8
-        },
-        {
-          "title": "Visualização com Matplotlib e Seaborn",
-          "lessons": 7
-        },
-        {
-          "title": "Análise Estatística Básica",
-          "lessons": 5
-        }
-      ]
-    }
-  ]
-}
-```
+### **tailwind-variants + tailwind-merge (componentização)**
+
+Alguns componentes como as tags de dificuldade e categoria dos cursos são ótimos candidatos pra utlização de variantes, daí usei tailwind-variants aqui por ser um pouquinho mais familiar com ele do que com CVA. Também usei tailwind merge pra implementar escape hatches (no caso foi uma só, no botão de matricula pra manter ele com tamanho fixo quando rola loading)/ter a possibilidade estilizar um componente de maneira diferente sem ter que criar uma variante nova.
+
+No mais é isso. Me diverti bastante com o projeto :)
