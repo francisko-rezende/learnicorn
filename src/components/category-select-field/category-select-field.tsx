@@ -12,10 +12,7 @@ export const CategorySelectField = () => {
       id="category-filter"
       label="Categoria"
       value={categoryFilter || ''}
-      onChange={e => {
-        const newCategoryParam = e.target.value as typeof categoryFilter;
-        handleSetCategoryFilter(newCategoryParam);
-      }}
+      onChange={handleSetCategoryFilter}
     >
       <option value={''}>Todas</option>
       {courseCategoryOptions.map(({ value, label }) => {

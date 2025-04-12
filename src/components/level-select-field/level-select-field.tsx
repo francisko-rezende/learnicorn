@@ -13,11 +13,7 @@ export const LevelSelectField = () => {
       label="Nível de dificuldade"
       id="level-filter"
       value={difficultyLevelFilter || ''}
-      onChange={e => {
-        const newDifficultyLevelFilter = e.target
-          .value as typeof difficultyLevelFilter;
-        handleSetDifficultyLevelFilter(newDifficultyLevelFilter);
-      }}
+      onChange={handleSetDifficultyLevelFilter}
     >
       <option value={''}>Todos</option>
       {courseLevelOptions.map(({ value, label }) => {

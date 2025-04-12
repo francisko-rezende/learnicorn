@@ -1,4 +1,6 @@
+import { ChangeEvent } from 'react';
 import { useCourseFilters } from './use-course-filters';
+import { type DifficultyLevelFilter } from '@/types/difficulty-level-filter';
 
 export const useLevelSelectField = () => {
   const { difficultyLevelFilter, setDifficultyLevelFilter } =
@@ -10,9 +12,16 @@ export const useLevelSelectField = () => {
     { value: 'avancado', label: 'Avançado' },
   ];
 
+  const handleSetDifficultyLevelFilter = (
+    e: ChangeEvent<HTMLSelectElement>,
+  ) => {
+    const newDifficultyLevelFilter = e.target.value as DifficultyLevelFilter;
+    setDifficultyLevelFilter(newDifficultyLevelFilter);
+  };
+
   return {
     difficultyLevelFilter,
     courseLevelOptions,
-    handleSetDifficultyLevelFilter: setDifficultyLevelFilter,
+    handleSetDifficultyLevelFilter,
   };
 };
