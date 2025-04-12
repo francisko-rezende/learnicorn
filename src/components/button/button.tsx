@@ -1,8 +1,9 @@
 import { ComponentProps } from 'react';
+import { twMerge } from 'tailwind-merge';
 import { tv, VariantProps } from 'tailwind-variants';
 
 const button = tv({
-  base: 'cursor-pointer rounded-md font-medium transition-colors disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
+  base: 'cursor-pointer rounded-md font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50',
   variants: {
     variant: {
       primary:
@@ -22,6 +23,7 @@ const button = tv({
 
 type ButtonProps = ComponentProps<'button'> & VariantProps<typeof button>;
 
-export const Button = ({ variant, size, ...props }: ButtonProps) => {
-  return <button className={button({ variant, size })} {...props} />;
+export const Button = ({ variant, size, className, ...props }: ButtonProps) => {
+  const mergedClasses = twMerge(button({ variant, size }), className);
+  return <button className={mergedClasses} {...props} />;
 };

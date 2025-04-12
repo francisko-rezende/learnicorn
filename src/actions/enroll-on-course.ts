@@ -5,11 +5,19 @@ type EnrollOnCourseArgs = {
   courseTitle: string;
 };
 
+const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
 export const enrollOnCourseAction = async ({
   courseId,
   courseTitle,
 }: EnrollOnCourseArgs) => {
-  console.log(
-    `Enrollment on course "${courseTitle}" with id ${courseId} confirmed`,
-  );
+  const delay = 1500 + Math.random() * 2000;
+  await wait(delay);
+  const successMessage = `Enrollment on course "${courseTitle}" with id ${courseId} confirmed`;
+  console.log(successMessage);
+  return {
+    success: true,
+    timestamp: new Date().getTime(),
+    courseTitleFromAction: courseTitle,
+  };
 };

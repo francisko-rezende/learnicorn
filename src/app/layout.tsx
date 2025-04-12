@@ -3,6 +3,7 @@ import { Geist } from 'next/font/google';
 import './globals.css';
 import { MainLayout } from '@/layouts/main-layout/main-layout';
 import { FiltersStoreProvider } from '@/providers/filters-store-provider';
+import { Toaster } from 'sonner';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -36,6 +37,7 @@ export default function RootLayout({
         <FiltersStoreProvider>
           <MainLayout>{children}</MainLayout>
         </FiltersStoreProvider>
+        <Toaster position="bottom-center" />
       </body>
     </html>
   );
