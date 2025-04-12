@@ -16,8 +16,8 @@ export const useCategorySelectField = () => {
     });
 
   const handleSetCategoryFilter = (e: ChangeEvent<HTMLSelectElement>) => {
-    const newCategoryParam = e.target.value as typeof categoryFilter;
-    setCategoryFilter(newCategoryParam);
+    const newCategoryFilter = e.target.value as typeof categoryFilter;
+    setCategoryFilter(newCategoryFilter);
   };
 
   return {
